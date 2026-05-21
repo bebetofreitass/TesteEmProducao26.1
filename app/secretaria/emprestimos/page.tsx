@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -9,15 +10,32 @@ import {
   Bell,
   Search,
   Settings,
-  Package,
-  Calendar,
   User,
-  BadgeCheck,
-  Clock3,
-  CheckCircle2,
+  UserCircle2,
+  LogOut,
 } from 'lucide-react'
 
 export default function EquipamentosEmprestadosPage() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const menuRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
+        setMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   const emprestimos = [
     {
@@ -56,16 +74,10 @@ export default function EquipamentosEmprestadosPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#07111f] text-white flex">
-
-      {/* SIDEBAR */}
-<aside className="w-72 bg-[#0b1727] border-r border-cyan-500/10 flex flex-col justify-between">
-
+    <div className="min-h-screen flex bg-[#07111f] text-white">
+      <aside className="w-72 bg-[#0b1727] border-r border-cyan-500/10 flex flex-col justify-between">
         <div>
-
-          {/* LOGO */}
           <div className="p-6 flex flex-col items-center border-b border-cyan-500/10">
-
             <Image
               src="/images/logo-sige.png"
               alt="SIGE Logo"
@@ -81,304 +93,200 @@ export default function EquipamentosEmprestadosPage() {
             <p className="text-sm text-cyan-300/70 mt-1">
               Gestão de Equipamentos
             </p>
-
           </div>
 
-          {/* BOTÃO */}
-          <div className="p-5"></div>
-
-          {/* MENU */}
-          <nav className="px-4 space-y-2">
-
+          <nav className="px-4 py-5 space-y-2">
             <Link
               href="/secretaria/home"
-              className="flex items-center gap-3 px-4 py-3 rounded-2xl
-              hover:bg-cyan-500/10 transition text-gray-300 hover:text-cyan-300"
+              className="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-cyan-500/10 transition text-gray-300 hover:text-cyan-300"
             >
-              <LayoutDashboard size={18}/>
+              <LayoutDashboard size={18} />
               Painel Principal
             </Link>
 
             <Link
               href="/secretaria/emprestimos"
-              className="flex items-center gap-3 px-4 py-3 rounded-2xl
-              bg-cyan-500/10 border border-cyan-400/20
-              text-cyan-300"
+              className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-cyan-500/10 border border-cyan-400/20 text-cyan-300"
             >
-              <ArrowRightLeft size={18}/>
+              <ArrowRightLeft size={18} />
               Equipamentos Emprestados
             </Link>
 
             <Link
               href="/secretaria/devolucoes"
-              className="flex items-center gap-3 px-4 py-3 rounded-2xl
-              hover:bg-cyan-500/10 transition text-gray-300 hover:text-cyan-300"
+              className="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-cyan-500/10 transition text-gray-300 hover:text-cyan-300"
             >
-              <Undo2 size={18}/>
+              <Undo2 size={18} />
               Devoluções
             </Link>
-
           </nav>
-
         </div>
-
-        {/* FOOTER */}
-        <div className="p-5 border-t border-cyan-500/10">
-
-          <button
-            className="w-full py-3 rounded-2xl border border-red-500/20
-            text-red-300 hover:bg-red-500/10 transition"
-          >
-            Sair da conta
-          </button>
-
-        </div>
-
       </aside>
 
-      {/* MAIN */}
       <main className="flex-1 flex flex-col">
-
-        {/* TOPBAR */}
         <header className="h-20 border-b border-cyan-500/10 bg-[#0b1727]/70 backdrop-blur-xl flex items-center justify-between px-8">
-
-          {/* MENU */}
-          <div className="flex items-center gap-8">
-
+          <div>
             <h1 className="text-xl font-semibold text-white">
               Controle de Empréstimos
             </h1>
 
+            <p className="text-xs text-cyan-300/70 mt-1">
+              Secretaria • Gestão em tempo real
+            </p>
           </div>
 
-          {/* AÇÕES */}
           <div className="flex items-center gap-5">
-
-            {/* SEARCH */}
-            <div className="flex items-center bg-[#132238]
-            border border-cyan-400/10 rounded-xl px-4 py-2 w-80">
-
-              <Search size={16} className="text-cyan-300"/>
+            <div
+              className="hidden md:flex items-center
+              bg-[#132238]/80 backdrop-blur-md
+              border border-cyan-400/10
+              rounded-2xl px-4 py-2.5 w-80
+              shadow-[0_0_20px_rgba(34,211,238,0.05)]
+              focus-within:border-cyan-400/30
+              focus-within:shadow-[0_0_25px_rgba(34,211,238,0.12)]
+              transition-all"
+            >
+              <Search size={16} className="text-cyan-300" />
 
               <input
                 placeholder="Buscar equipamento..."
-                className="bg-transparent outline-none ml-2 text-sm w-full placeholder:text-gray-500"
+                className="bg-transparent outline-none ml-3 text-sm w-full
+                text-gray-200 placeholder:text-gray-500"
               />
-
             </div>
 
-            <Bell className="text-cyan-300 cursor-pointer"/>
+            <button
+              className="relative w-11 h-11 rounded-2xl
+              bg-[#132238]/80 border border-cyan-400/10
+              flex items-center justify-center
+              hover:bg-cyan-500/10 hover:border-cyan-400/20
+              transition-all duration-300
+              shadow-[0_0_20px_rgba(34,211,238,0.05)]"
+            >
+              <Bell size={18} className="text-cyan-300" />
 
-            <Settings className="text-cyan-300 cursor-pointer"/>
+              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.9)]" />
+            </button>
 
-            <div className="w-10 h-10 rounded-full
-            bg-gradient-to-br from-cyan-400 to-blue-600
-            shadow-[0_0_15px_rgba(34,211,238,0.5)]"/>
+            <div className="relative" ref={menuRef}>
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="w-11 h-11 rounded-2xl
+                bg-[#132238]/80 border border-cyan-400/10
+                flex items-center justify-center
+                hover:bg-cyan-500/10 hover:border-cyan-400/20
+                transition-all duration-300
+                shadow-[0_0_20px_rgba(34,211,238,0.05)]"
+              >
+                <Settings size={18} className="text-cyan-300" />
+              </button>
 
+              {menuOpen && (
+                <div
+                  className="absolute right-0 top-14 w-60
+                  bg-[#0f1c2e]/95 backdrop-blur-xl
+                  border border-cyan-400/10
+                  rounded-3xl overflow-hidden
+                  shadow-[0_0_35px_rgba(34,211,238,0.12)]
+                  z-50"
+                >
+                  <Link
+                    href="/perfil"
+                    className="flex items-center gap-3 px-5 py-4
+                    text-gray-300 hover:bg-cyan-500/10
+                    hover:text-cyan-300 transition"
+                  >
+                    <User size={18} />
+                    Perfil
+                  </Link>
+
+                  <Link
+                    href="/"
+                    className="flex items-center gap-3 px-5 py-4
+                    text-red-300 hover:bg-red-500/10 transition"
+                  >
+                    <LogOut size={18} />
+                    Sair da Conta
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <div
+              className="relative w-11 h-11 rounded-2xl
+              bg-gradient-to-br from-cyan-400 to-blue-600
+              flex items-center justify-center
+              text-white font-bold
+              shadow-[0_0_20px_rgba(34,211,238,0.35)]"
+            >
+              <UserCircle2 size={20} />
+
+              <div
+                className="absolute -bottom-1 -right-1
+                w-3 h-3 rounded-full bg-emerald-400
+                border-2 border-[#07111f]"
+              />
+            </div>
           </div>
-
         </header>
 
-        {/* CONTEÚDO */}
         <div className="p-8">
-
-          {/* HEADER */}
           <div className="mb-8">
-
             <h2 className="text-4xl font-bold bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
               Equipamentos Emprestados
             </h2>
 
             <p className="text-gray-400 mt-2">
-              Lista completa de equipamentos atualmente emprestados para professores.
+              Lista completa de equipamentos atualmente emprestados.
             </p>
-
           </div>
 
-          {/* STATS */}
-          <div className="grid grid-cols-3 gap-6 mb-8">
+          <div className="space-y-5">
+            {emprestimos.map((item, index) => (
+              <div
+                key={index}
+                className="bg-[#0f1c2e]/90 border border-cyan-500/10 rounded-2xl p-5 hover:bg-cyan-500/5 transition"
+              >
+                <div className="flex justify-between">
+                  <div className="flex gap-5">
+                    <Image
+                      src={item.imagem}
+                      alt={item.equipamento}
+                      width={80}
+                      height={80}
+                      className="rounded-2xl object-cover"
+                    />
 
-            <div className="bg-[#0f1c2e] border border-cyan-500/10 rounded-2xl p-6">
+                    <div>
+                      <h3 className="text-xl font-semibold">
+                        {item.equipamento}
+                      </h3>
 
-              <div className="flex items-center justify-between mb-3">
+                      <p className="text-gray-400 text-sm">
+                        {item.professor}
+                      </p>
 
-                <Package className="text-cyan-300"/>
+                      <p className="text-gray-500 text-xs">
+                        {item.departamento}
+                      </p>
+                    </div>
+                  </div>
 
-                <span className="text-xs px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300">
-                  Ativos
-                </span>
+                  <div className="text-right">
+                    <p className="text-cyan-300 text-sm">
+                      {item.devolucao}
+                    </p>
 
+                    <p className="text-xs text-gray-500">
+                      {item.id}
+                    </p>
+                  </div>
+                </div>
               </div>
-
-              <h3 className="text-4xl font-bold text-white">
-                84
-              </h3>
-
-              <p className="text-sm text-gray-400 mt-2">
-                Equipamentos emprestados
-              </p>
-
-            </div>
-
-            <div className="bg-[#0f1c2e] border border-yellow-500/10 rounded-2xl p-6">
-
-              <div className="flex items-center justify-between mb-3">
-
-                <Clock3 className="text-yellow-300"/>
-
-                <span className="text-xs px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-300">
-                  Atenção
-                </span>
-
-              </div>
-
-              <h3 className="text-4xl font-bold text-white">
-                6
-              </h3>
-
-              <p className="text-sm text-gray-400 mt-2">
-                Próximos da devolução
-              </p>
-
-            </div>
-
-            <div className="bg-[#0f1c2e] border border-red-500/10 rounded-2xl p-6">
-
-              <div className="flex items-center justify-between mb-3">
-
-                <CheckCircle2 className="text-red-300"/>
-
-                <span className="text-xs px-3 py-1 rounded-full bg-red-500/10 text-red-300">
-                  Atrasados
-                </span>
-
-              </div>
-
-              <h3 className="text-4xl font-bold text-white">
-                2
-              </h3>
-
-              <p className="text-sm text-gray-400 mt-2">
-                Equipamentos pendentes
-              </p>
-
-            </div>
-
+            ))}
           </div>
-
-          {/* LISTA */}
-{/* LISTA */}
-<div className="space-y-5">
-
-  {emprestimos.map((item, index) => (
-
-    <Link
-      key={index}
-      href="/secretaria/detalheemprestimo"
-      className="block"
-    >
-
-      <div
-        className="bg-[#0f1c2e]/90 border border-cyan-500/10
-        rounded-2xl p-5 hover:border-cyan-400/20
-        hover:bg-cyan-500/5
-        transition-all duration-300 shadow-xl cursor-pointer"
-      >
-
-        <div className="flex items-center justify-between">
-
-          {/* ESQUERDA */}
-          <div className="flex items-center gap-5">
-
-            <Image
-              src={item.imagem}
-              alt={item.equipamento}
-              width={90}
-              height={90}
-              className="rounded-2xl object-cover border border-cyan-400/20"
-            />
-
-            <div>
-
-              <div className="flex items-center gap-3 mb-2">
-
-                <h3 className="text-xl font-semibold text-white">
-                  {item.equipamento}
-                </h3>
-
-                <span
-                  className={`text-xs px-3 py-1 rounded-full border
-                  ${
-                    item.status === 'Atrasado'
-                      ? 'bg-red-500/10 text-red-300 border-red-400/20'
-                      : 'bg-cyan-500/10 text-cyan-300 border-cyan-400/20'
-                  }
-                `}
-                >
-                  {item.status}
-                </span>
-
-              </div>
-
-              <div className="grid grid-cols-2 gap-x-10 gap-y-2 text-sm">
-
-                <div className="flex items-center gap-2 text-gray-300">
-                  <User size={15} className="text-cyan-300"/>
-                  {item.professor}
-                </div>
-
-                <div className="flex items-center gap-2 text-gray-300">
-                  <BadgeCheck size={15} className="text-cyan-300"/>
-                  Matrícula: {item.matricula}
-                </div>
-
-                <div className="flex items-center gap-2 text-gray-300">
-                  <Package size={15} className="text-cyan-300"/>
-                  {item.departamento}
-                </div>
-
-                <div className="flex items-center gap-2 text-gray-300">
-                  <Calendar size={15} className="text-cyan-300"/>
-                  {item.dataEmprestimo}
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-          {/* DIREITA */}
-          <div className="text-right">
-
-            <p className="text-sm text-gray-400 mb-2">
-              Devolução prevista
-            </p>
-
-            <p className="text-lg font-semibold text-cyan-300">
-              {item.devolucao}
-            </p>
-
-            <p className="text-xs text-gray-500 mt-2">
-              Código: {item.id}
-            </p>
-
-          </div>
-
         </div>
-
-      </div>
-
-    </Link>
-
-  ))}
-
-</div>
-
-        </div>
-
       </main>
-
     </div>
   )
 }

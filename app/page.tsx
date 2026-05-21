@@ -8,101 +8,178 @@ export default function LoginPage() {
   const router = useRouter()
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-[#07111f]">
 
-      {/* 🔵 LADO ESQUERDO - IMAGEM */}
-      <div className="hidden md:flex w-1/2 relative">
+      {/* LADO ESQUERDO */}
+      <div className="hidden md:flex w-1/2 relative overflow-hidden">
 
         <img
           src="/images/login-bg.jpg"
-          className="absolute w-full h-full object-cover"
+          className="absolute w-full h-full object-cover scale-105"
           alt="Background"
         />
 
-        {/* overlay azul */}
-        <div className="absolute w-full h-full bg-blue-900/70" />
+        {/* Overlay futurista */}
+        <div className="absolute inset-0 bg-[#07111f]/80 backdrop-blur-[2px]" />
+
+        {/* Glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.25),transparent_50%)]" />
+
+        {/* Conteúdo */}
+        <div className="relative z-10 flex flex-col justify-center px-16">
+
+          <div className="mb-6">
+
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full
+            border border-cyan-400/20 bg-cyan-500/10 text-cyan-300 text-sm
+            shadow-[0_0_20px_rgba(34,211,238,0.15)]">
+
+              ⚡ Plataforma Inteligente
+
+            </div>
+
+          </div>
+
+          <h1 className="text-5xl font-bold leading-tight text-white mb-6">
+            Sistema Integrado de
+            <span className="block bg-gradient-to-r from-cyan-300 to-blue-500 bg-clip-text text-transparent">
+              Gestão de Equipamentos
+            </span>
+          </h1>
+
+          <p className="text-gray-300 text-lg max-w-lg leading-relaxed">
+            Controle empréstimos, devoluções e ativos laboratoriais
+            com uma experiência moderna, rápida e segura.
+          </p>
+
+        </div>
 
       </div>
 
-      {/* ⚪ LADO DIREITO - LOGIN */}
-      <div className="w-full md:w-1/2 flex items-center justify-center bg-gray-100 px-4">
+      {/* LADO DIREITO */}
+      <div className="w-full md:w-1/2 flex items-center justify-center px-4 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.08),transparent_40%)]">
 
-        <div className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden border">
+        <div className="w-full max-w-md bg-[#0f1c2e]/90 backdrop-blur-xl
+        rounded-3xl overflow-hidden border border-cyan-500/10
+        shadow-[0_0_40px_rgba(34,211,238,0.08)]">
 
           {/* Header */}
-          <div className="bg-blue-800 text-white text-center py-6 px-4">
-            <h1 className="text-lg font-semibold">SIGE</h1>
-            <p className="text-xs opacity-80 mt-1">
+          <div className="border-b border-cyan-500/10 px-8 py-8 text-center">
+
+            <div className="w-16 h-16 mx-auto rounded-2xl
+            bg-gradient-to-br from-cyan-400 to-blue-600
+            flex items-center justify-center text-white text-2xl font-bold
+            shadow-[0_0_20px_rgba(34,211,238,0.4)] mb-4">
+
+              S
+
+            </div>
+
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
+              SIGE
+            </h1>
+
+            <p className="text-sm text-gray-400 mt-2">
               Sistema Integrado de Gestão de Equipamentos
             </p>
+
           </div>
 
           {/* Conteúdo */}
-          <div className="p-6">
+          <div className="p-8">
 
-            <h2 className="text-center text-xl font-semibold text-gray-800">
+            <h2 className="text-center text-2xl font-semibold text-white">
               Bem-vindo de volta
             </h2>
-            <p className="text-center text-sm text-gray-500 mb-6">
-              Insira suas credenciais
+
+            <p className="text-center text-sm text-gray-400 mb-8 mt-1">
+              Insira suas credenciais para continuar
             </p>
 
             {/* Email */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+            <div className="mb-5">
+
+              <label className="block text-sm font-medium text-cyan-200 mb-2">
                 E-mail Institucional
               </label>
+
               <input
                 type="email"
                 placeholder="admin@unifor.edu.br"
-                className="w-full px-3 py-2 border border-gray-400 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500
-                focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-blue-700 transition"
+                className="w-full px-4 py-3 rounded-xl
+                bg-[#132238]
+                border border-cyan-400/15
+                text-white placeholder:text-gray-500
+                focus:outline-none focus:ring-2 focus:ring-cyan-400
+                focus:border-cyan-400
+                transition"
               />
+
             </div>
 
             {/* Senha */}
-            <div className="mb-2">
-              <div className="flex justify-between items-center mb-1">
-                <label className="text-sm font-medium text-gray-700">
+            <div className="mb-3">
+
+              <div className="flex justify-between items-center mb-2">
+
+                <label className="text-sm font-medium text-cyan-200">
                   Senha
                 </label>
-                <span className="text-xs text-blue-600 hover:underline cursor-pointer">
+
+                <span className="text-xs text-cyan-300 hover:text-cyan-200 cursor-pointer transition">
                   Suporte
                 </span>
+
               </div>
 
               <div className="relative">
+
                 <input
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Digite sua senha"
-                  className="w-full px-3 py-2 border border-gray-400 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500
-                  focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-blue-700 transition"
+                  className="w-full px-4 py-3 rounded-xl
+                  bg-[#132238]
+                  border border-cyan-400/15
+                  text-white placeholder:text-gray-500
+                  focus:outline-none focus:ring-2 focus:ring-cyan-400
+                  focus:border-cyan-400
+                  transition"
                 />
+
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-2.5 text-gray-600 hover:text-gray-800"
+                  className="absolute right-4 top-3 text-cyan-300 hover:text-cyan-200 transition"
                 >
                   👁
                 </button>
+
               </div>
+
             </div>
 
             {/* Checkbox */}
-            <div className="flex items-center gap-2 mt-4 mb-5">
+            <div className="flex items-center gap-2 mt-5 mb-6">
+
               <input
                 type="checkbox"
-                className="w-4 h-4 accent-blue-700"
+                className="w-4 h-4 accent-cyan-400"
               />
-              <span className="text-sm text-gray-600">
+
+              <span className="text-sm text-gray-400">
                 Lembrar desta estação
               </span>
+
             </div>
 
-            {/* Botão Entrar */}
+            {/* Botão */}
             <button
               onClick={() => router.push('/professor/homeprofessor')}
-              className="w-full bg-blue-800 hover:bg-blue-900 text-white py-2.5 rounded-lg font-medium transition shadow"
+              className="w-full py-3 rounded-xl font-semibold
+              bg-gradient-to-r from-cyan-400 to-blue-600
+              hover:scale-[1.01]
+              text-white transition-all duration-300
+              shadow-[0_0_25px_rgba(34,211,238,0.35)]"
             >
               Entrar
             </button>
@@ -110,25 +187,34 @@ export default function LoginPage() {
           </div>
 
           {/* Footer */}
-          <div className="text-center text-xs text-gray-500 py-4 border-t bg-gray-50">
-            <div className="flex justify-center gap-4 mb-1">
-              <span className="hover:text-gray-700 cursor-pointer">
+          <div className="border-t border-cyan-500/10 bg-[#0b1727]/70 py-5 px-6 text-center">
+
+            <div className="flex justify-center gap-5 mb-2 text-xs text-gray-400">
+
+              <span className="hover:text-cyan-300 cursor-pointer transition">
                 Suporte
               </span>
-              <span className="hover:text-gray-700 cursor-pointer">
+
+              <span className="hover:text-cyan-300 cursor-pointer transition">
                 Privacidade
               </span>
-              <span className="hover:text-gray-700 cursor-pointer">
+
+              <span className="hover:text-cyan-300 cursor-pointer transition">
                 Contato
               </span>
+
             </div>
-            <div className="text-[10px] text-gray-400">
+
+            <div className="text-[10px] text-gray-500">
               © 2026 Sistema de Gestão de Equipamentos
             </div>
+
           </div>
 
         </div>
+
       </div>
+
     </div>
   )
 }

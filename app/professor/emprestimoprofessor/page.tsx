@@ -51,20 +51,7 @@ export default function EmprestimoPage() {
           </div>
 
           {/* BOTÃO */}
-          <div className="p-5">
-
-            <button
-              className="w-full py-3 rounded-2xl
-              bg-gradient-to-r from-cyan-400 to-blue-600
-              text-white font-semibold
-              shadow-[0_0_25px_rgba(34,211,238,0.35)]
-              hover:scale-[1.02]
-              transition-all"
-            >
-              + Novo Empréstimo
-            </button>
-
-          </div>
+          <div className="p-5"></div>
 
           {/* MENU */}
           <nav className="px-4 space-y-2">

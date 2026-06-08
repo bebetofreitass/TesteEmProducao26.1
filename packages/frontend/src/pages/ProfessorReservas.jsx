@@ -69,9 +69,11 @@ export default function ProfessorReservas() {
       return;
     }
 
+    console.log(item)
+
     try {
-      const payload = {
-        assetType: item.type,
+      const payload = { 
+        assetType: item.assetType,
         assetId: item.id,
         academicPurpose: finalidade
       };

@@ -1,0 +1,112 @@
+.page-header {
+  margin-bottom: 20px;
+}
+
+.form-container {
+  background-color: white;
+
+  padding: 20px;
+
+  border-radius: 10px;
+
+  margin-bottom: 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-container input,
+.form-container select {
+  padding: 12px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 8px;
+
+  outline: none;
+}
+
+.buttons {
+  display: flex;
+
+  gap: 10px;
+}
+
+.buttons button {
+  padding: 12px 20px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background-color: #0d3b66;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background-color: #777 !important;
+}
+
+table {
+  width: 100%;
+
+  background-color: white;
+
+  border-collapse: collapse;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+table th {
+  background-color: #0d3b66;
+
+  color: white;
+}
+
+table th,
+table td {
+  padding: 15px;
+
+  border-bottom: 1px solid #eee;
+
+  text-align: left;
+}
+
+.edit-btn {
+  padding: 8px 12px;
+
+  border: none;
+
+  background-color: #ffc107;
+
+  border-radius: 5px;
+
+  margin-right: 10px;
+
+  cursor: pointer;
+}
+
+.delete-btn {
+  padding: 8px 12px;
+
+  border: none;
+
+  background-color: #dc3545;
+
+  color: white;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+}

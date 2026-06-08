@@ -1,61 +1,54 @@
-# 📌 GAC - Sistema de Gestão de Ativos
+# gac-frontend — Frontend
 
-## 📖 Sobre o Projeto
-
-O GAC (Gestão de Ativos Computacionais) é um sistema web desenvolvido para realizar o gerenciamento de ativos institucionais, permitindo o controle de:
-
-- Projetores
-- Chaves
-- Usuários
-- Relatórios
-- Empréstimos e reservas
-
-O objetivo do sistema é facilitar o controle administrativo dos recursos da instituição, proporcionando organização, rastreabilidade e gerenciamento eficiente dos ativos.
+Interface web do sistema **GAC** (Gestão de Ativos Computacionais) do CCT/UNIFOR.  
+Desenvolvida com **React 19 + Vite 7** integrada à API REST do backend.
 
 ---
 
-# Link Vercel
+## 🛠️ Stack
 
-https://front-trabalhoweb-cmsvnw3vt-gabriels-projects-f0aa4a5b.vercel.app
-
----
-
-# 🚀 Tecnologias Utilizadas
-
-## Frontend
-
-- React
-- React Router DOM
-- CSS3
-- Axios
-- Vite
-
-## Backend
-
-- Java
-- Spring Boot
-- JWT Authentication
-- MySQL / PostgreSQL
+| Tecnologia | Versão | Função |
+|---|---|---|
+| React | 19.1 | Framework UI |
+| React Router DOM | 7.16 | Roteamento SPA |
+| Axios | 1.16 | Requisições HTTP à API |
+| React Icons | 5.6 | Ícones |
+| Vite | 7.1 | Build tool e dev server |
+| SWC | (plugin) | Compilação rápida de JSX |
+| ESLint | 9.32 | Linter |
+| CSS3 | — | Estilização (Vanilla CSS por módulo) |
 
 ---
 
-# 📂 Estrutura do Projeto
+## 🏗️ Estrutura
 
-```bash
+```
 src/
-│
 ├── components/
-│   ├── Navbar.jsx
-│   ├── Sidebar.jsx
-│   └── ProtectedRoute.jsx
+│   ├── Navbar.jsx           # Barra de navegação superior
+│   ├── Sidebar.jsx          # Menu lateral
+│   └── ProtectedRoute.jsx   # HOC de proteção de rota por role
+│
+├── contexts/
+│   └── AuthContext.jsx      # Contexto global de autenticação (JWT + role)
 │
 ├── pages/
-│   ├── Login.jsx
-│   ├── Dashboard.jsx
-│   ├── Projetores.jsx
-│   ├── Chaves.jsx
-│   ├── Usuarios.jsx
-│   └── Relatorios.jsx
+│   ├── Login.jsx            # Tela de login
+│   ├── Dashboard.jsx        # Visão geral — cards e últimas movimentações
+│   ├── Projetores.jsx       # CRUD de projetores
+│   ├── Chaves.jsx           # CRUD de chaves
+│   ├── Usuarios.jsx         # Gestão de usuários e professores
+│   ├── Relatorios.jsx       # Relatórios por período
+│   ├── Movimentacoes.jsx    # Central de movimentações (empréstimo/devolução)
+│   ├── ProfessorReservas.jsx # Tela de reservas do professor
+│   ├── LiberarManutencao.jsx # Liberação de ativos em manutenção
+│   └── AlterarSenha.jsx     # Troca de senha do usuário logado
+│
+├── routes/
+│   └── AppRoutes.jsx        # Definição de todas as rotas e guards
+│
+├── services/
+│   └── api.js               # Instância Axios configurada com baseURL e JWT
 │
 ├── styles/
 │   ├── global.css
@@ -68,187 +61,79 @@ src/
 │   ├── usuarios.css
 │   └── relatorios.css
 │
-├── services/
-│   └── api.js
-│
-├── routes/
-│   └── AppRoutes.jsx
-│
-├── contexts/
-│   └── AuthContext.jsx
-│
 ├── App.jsx
 └── main.jsx
 ```
 
 ---
 
-# 🔐 Funcionalidades
+## 📍 Rotas
 
-## ✅ Login
-
-- Tela de autenticação
-- Validação de acesso
-- Proteção de rotas
-- Controle de sessão
-
----
-
-## ✅ Dashboard
-
-- Visão geral do sistema
-- Cards informativos
-- Estatísticas rápidas
-- Interface responsiva
+| Rota | Página | Roles permitidos |
+|---|---|---|
+| `/` | Login | Público |
+| `/dashboard` | Dashboard | ADMIN, ATENDENTE, PROFESSOR |
+| `/projetores` | Projetores | ADMIN, ATENDENTE |
+| `/chaves` | Chaves | ADMIN, ATENDENTE |
+| `/usuarios` | Usuários | ADMIN, ATENDENTE |
+| `/relatorios` | Relatórios | ADMIN, ATENDENTE |
+| `/movimentacoes` | Movimentações | ADMIN, ATENDENTE |
+| `/manutencao` | Liberar Manutenção | ADMIN, ATENDENTE |
+| `/reservar` | Reservas (professor) | PROFESSOR |
+| `/alterar-senha` | Alterar Senha | ADMIN, ATENDENTE, PROFESSOR |
 
 ---
 
-## ✅ Gerenciamento de Projetores
+## ▶️ Como executar
 
-- Cadastro de projetores
-- Edição de registros
-- Exclusão de registros
-- Listagem dinâmica
-- Controle de status
+### Pré-requisitos
 
----
+- Node.js 18+
+- Backend (`gac-api`) rodando em `http://localhost:8080`
 
-## ✅ Gerenciamento de Chaves
-
-- Cadastro de chaves
-- Edição de registros
-- Exclusão de registros
-- Controle de disponibilidade
-
----
-
-## ✅ Gerenciamento de Usuários
-
-- Cadastro de usuários
-- Edição de registros
-- Exclusão de registros
-- Controle de perfis:
-  - ADMIN
-  - ATENDENTE
-  - PROFESSOR
-
----
-
-## ✅ Relatórios
-
-- Filtro por período
-- Consulta de movimentações
-- Exibição dinâmica em tabela
-- Organização de informações
-
----
-
-# ⚙️ Como Executar o Projeto
-
-## 1. Clone o repositório
+### Instalação e execução
 
 ```bash
-git clone URL_DO_REPOSITORIO
-```
-
----
-
-## 2. Acesse a pasta do projeto
-
-```bash
-cd nome-do-projeto
-```
-
----
-
-## 3. Instale as dependências
-
-```bash
+# A partir de packages/frontend/
 npm install
-```
-
----
-
-## 4. Execute o projeto
-
-```bash
 npm run dev
+# App disponível em http://localhost:5173
 ```
 
----
-
-## 5. Abra no navegador
+### Scripts disponíveis
 
 ```bash
-http://localhost:5173
+npm run dev       # Dev server com HMR
+npm run build     # Build de produção (dist/)
+npm run preview   # Preview do build
+npm run lint      # ESLint
 ```
 
 ---
 
-# 🔗 Integração com Backend
+## 🔐 Autenticação
 
-O frontend está preparado para integração com uma API REST desenvolvida em Spring Boot.
+O token JWT obtido no login é armazenado no `localStorage` e injetado automaticamente em todas as requisições via interceptor Axios.
 
-A comunicação entre frontend e backend será realizada utilizando Axios.
+O `AuthContext` expõe:
+- `user` — dados do usuário logado (id, nome, role)
+- `token` — JWT atual
+- `login(registrationNumber, password)` — realiza login na API
+- `logout()` — limpa sessão e redireciona para `/`
 
-Exemplo:
-
-```js
-const response = await api.get("/projetores");
-```
-
----
-
-# 🔒 Autenticação
-
-O sistema utiliza autenticação baseada em JWT.
-
-O token de autenticação é armazenado no:
-
-```js
-localStorage
-```
+Rotas protegidas pelo `ProtectedRoute` redirecionam para `/` caso o usuário não esteja autenticado ou não possua a role necessária.
 
 ---
 
-# 📱 Responsividade
+## 🌐 Deploy
 
-O sistema possui adaptação para:
-
-- Desktop
-- Tablets
-- Smartphones
+| Ambiente | URL |
+|---|---|
+| Vercel (produção) | https://front-trabalhoweb-cmsvnw3vt-gabriels-projects-f0aa4a5b.vercel.app |
 
 ---
 
-# 🎯 Objetivo Acadêmico
-
-Este projeto foi desenvolvido com fins acadêmicos para aplicação prática de conceitos de:
-
-- Frontend React
-- Arquitetura de Sistemas
-- CRUD
-- Rotas protegidas
-- Context API
-- Integração Full Stack
-- Responsividade
-- Organização de código
-
----
-
-# 🛠️ Funcionalidades Futuras
-
-- Integração completa com backend
-- Persistência em banco de dados
-- Exportação de relatórios PDF
-- Dashboard com gráficos
-- Sistema de permissões
-- Histórico de movimentações
-- Controle de empréstimos
-
----
-
-# 👨‍💻 Desenvolvedores
+## 👨‍💻 Desenvolvedores
 
 - Pedro Alberto
 - Breno Oliveira
@@ -257,6 +142,6 @@ Este projeto foi desenvolvido com fins acadêmicos para aplicação prática de 
 
 ---
 
-# 📄 Licença
+## 📄 Licença
 
-Projeto desenvolvido para fins educacionais.
+Projeto acadêmico — CCT/UNIFOR.

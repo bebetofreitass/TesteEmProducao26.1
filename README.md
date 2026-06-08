@@ -84,6 +84,9 @@ npm run dev
 - Breno Oliveira
 - Gabriel Vieira
 - João Pedro
+- Carlos Alberto
+- Leonardo Oliveira
+- Mateus Teles
 
 ---
 

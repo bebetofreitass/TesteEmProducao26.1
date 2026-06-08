@@ -205,9 +205,6 @@ springdoc.swagger-ui.path=/swagger-ui.html
 ## 👨‍💻 Desenvolvedores
 
 - Pedro Alberto
-- Breno Oliveira
-- Gabriel Vieira
-- João Pedro
 
 ---
 

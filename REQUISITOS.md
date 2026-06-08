@@ -4,6 +4,13 @@
 **Data:** 2026-06-03  
 **Escopo:** Gestão patrimonial de projetores e chaves do CCT/UNIFOR
 
+## 👨‍💻 Desenvolvedores
+
+- Pedro Alberto
+- Carlos Alberto
+- Leonardo Oliveira
+- Mateus Teles
+
 ---
 
 ## ÍNDICE
